@@ -19,19 +19,19 @@ class StackAlloc
 public:
     //
     typedef StackNode_<T> Node;
-    typedef typename Allco::template rebind<Node>::other allocator;
+    typedef typename Alloc::template rebind<Node>::other allocator;
 
     //
     StackAlloc() {head_ = 0;}
     //
-    ~StackAlloc() {clear(};}
+    ~StackAlloc() {clear();}
 
     //
     bool empty() {return (head_ == 0);}
 
     //
     void clear() {
-        Node8 curr = head_;
+        Node* curr = head_;
         while (curr != 0) {
             Node* tmp = curr->prev;
             allocator_.destroy(curr);
@@ -57,7 +57,7 @@ public:
     //³öÕ»
     T pop() {
        T result = head_->data;
-       Node8 tmp = head_->prev;
+       Node* tmp = head_->prev;
        allocator_.destroy(head_);
        allocator_.deallocate(head_, 1);
        head_ = tmp;
