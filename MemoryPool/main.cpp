@@ -3,11 +3,14 @@
 #include<ctime>     //使用clock()
 #include<vector>
 
-#include "MemoryPool.h"     //MemoryPool<T>,内存池头文件
+//#include "MemoryPool.h"     //MemoryPool<T>,内存池头文件
 #include "StackAlloc.h"     //stackAlloc<T, Alloc>，链表栈头文件
 //StackAlloc是一个链表栈，接受两个模板参数，第一个参数类型是栈中的元素类型，第二个参数为内存分配器
 
 using namespace std;
+
+#define ELEMS 10000000
+#define REPS 100
 
 int main()
 {
@@ -31,6 +34,7 @@ int main()
     cout << (((double)clock() - start) / CLOCKS_PER_SEC) << endl << endl;
 
 
+    /*
     //使用内存池
     StackAlloc<int, MemoryPool<int>> stackPool;
     start = clock();
@@ -44,6 +48,7 @@ int main()
 
     cout << "MemoryPool Allocator Time : " << endl;
     cout << (((double)clock() - start) / CLOCKS_PER_SEC) << endl << endl;
+    */
 
 
     return 0;
