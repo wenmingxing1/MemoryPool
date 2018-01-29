@@ -4,6 +4,7 @@
 #include<memory>
 using namespace std;
 
+//定义链表栈节点
 template <typename T>
 struct StackNode_
 {
@@ -43,7 +44,7 @@ public:
     //入栈
     void push(T element) {
         //为一个节点分配内存
-        Node* newNode = allocator_.allocate(1);
+        Node* newNode = allocator_.allocate(1);       //分配原始内存
         //调用节点的构造函数
         allocator_.construct(newNode, Node());
 
@@ -57,8 +58,8 @@ public:
     T pop() {
        T result = head_->data;
        Node* tmp = head_->prev;
-       allocator_.destroy(head_);
-       allocator_.deallocate(head_, 1);
+       allocator_.destroy(head_);   //调用allocator的析构函数，销魂内存上的内容
+       allocator_.deallocate(head_, 1);     //释放内存
        head_ = tmp;
        return result;
     }
@@ -68,6 +69,7 @@ public:
 
 private:
     allocator allocator_;
+    //栈顶
     Node* head_;
 };
 
