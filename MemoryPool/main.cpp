@@ -8,9 +8,10 @@
 //StackAlloc是一个链表栈，接受两个模板参数，第一个参数类型是栈中的元素类型，第二个参数为内存分配器
 
 using namespace std;
-
-#define ELEMS 10000000
+//循环次数
 #define REPS 100
+//插入元素个数
+#define ELEMS 10000000
 
 int main()
 {
@@ -31,7 +32,8 @@ int main()
     }
 
     cout << "Default Allocator Time : " << endl;
-    cout << (((double)clock() - start) / CLOCKS_PER_SEC) << endl << endl;
+    cout << (((double)clock() - start) / CLOCKS_PER_SEC) << endl << endl;   //CLOCKS_PER_SEC是一个常数，表示一秒钟
+    //CPU运行的时钟周期数，用于将clock函数的结果转化为以秒为单位的量
 
 
     /*
