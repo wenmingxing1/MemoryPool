@@ -13,13 +13,13 @@ struct StackNode_
 };
 
 //T为存储的对象类型，Alloc为使用的分配器，并默认使用allocator作为对象的分配器
-template <class T, class Alloc = allocator<T>>
+template <typename T, typename Alloc = allocator<T>>
 class StackAlloc
 {
 public:
     //使用typedef简化类型名
     typedef StackNode_<T> Node;
-    typedef typename Alloc::template rebind<Node>::other allocator;
+    typedef typename Alloc::template rebind<Node>::other allocatorOther;
 
     //默认构造函数
     StackAlloc() {head_ = 0;}
@@ -32,6 +32,7 @@ public:
     //释放栈中元素的所有内存
     void clear() {
         Node* curr = head_;
+        //依次出栈
         while (curr != 0) {
             Node* tmp = curr->prev;
             allocator_.destroy(curr);
@@ -68,7 +69,7 @@ public:
     T top() {return (head_->data);}
 
 private:
-    allocator allocator_;
+    allocatorOther allocator_;
     //栈顶
     Node* head_;
 };
