@@ -3,7 +3,7 @@
 #include<ctime>     //使用clock()
 #include<vector>
 
-//#include "MemoryPool.h"     //MemoryPool<T>,内存池头文件
+#include "MemoryPool.h"     //MemoryPool<T>,内存池头文件
 #include "StackAlloc.h"     //stackAlloc<T, Alloc>，链表栈头文件
 //StackAlloc是一个链表栈，接受两个模板参数，第一个参数类型是栈中的元素类型，第二个参数为内存分配器
 
@@ -11,7 +11,7 @@ using namespace std;
 //循环次数
 #define REPS 100
 //插入元素个数
-#define ELEMS 10000000
+#define ELEMS 1000000
 
 int main()
 {
@@ -35,8 +35,22 @@ int main()
     cout << (((double)clock() - start) / CLOCKS_PER_SEC) << endl << endl;   //CLOCKS_PER_SEC是一个常数，表示一秒钟
     //CPU运行的时钟周期数，用于将clock函数的结果转化为以秒为单位的量
 
+    //使用vector
+    vector<int> stackVector;
+    start = clock();
+    for (int j = 0; j < REPS; ++j) {
+        assert(stackVector.empty());
+        for (int i = 0; i < ELEMS; ++i)
+            stackVector.push_back(i);
+        for (int i = 0; i < ELEMS; ++i)
+            stackVector.pop_back();
+    }
 
-    /*
+    cout << "Vector Time:" << endl;
+    cout << (((double)clock() - start) / CLOCKS_PER_SEC) << endl << endl;
+
+
+
     //使用内存池
     StackAlloc<int, MemoryPool<int>> stackPool;
     start = clock();
@@ -50,7 +64,7 @@ int main()
 
     cout << "MemoryPool Allocator Time : " << endl;
     cout << (((double)clock() - start) / CLOCKS_PER_SEC) << endl << endl;
-    */
+
 
 
     return 0;
