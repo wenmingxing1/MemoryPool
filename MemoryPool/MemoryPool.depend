@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1517579324 source:f:\自学代码\实验楼\memorypool\memorypool\main.cpp
+	<iostream>
+	<cassert>
+	<ctime>
+	<vector>
+	"StackAlloc.h"
+
+1517233150 f:\自学代码\实验楼\memorypool\memorypool\stackalloc.h
+	<memory>
+
